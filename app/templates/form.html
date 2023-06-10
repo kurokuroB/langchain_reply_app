@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3>希望の文体で、文章を校正します。※30秒程度の時間を要します</h3>
+<form action="/result" method="post">
+    <div>
+        <label for="style">希望する文体</label>
+        <textarea id="style" name="style",  rows="4" cols="40", maxlength="1024", placeholder="1024文字以内"></textarea>
+    </div>
+    <div>
+        <label for="sentence">校正したい文章</label>
+        <textarea id="sentence" name="sentence",  rows="4" cols="40", maxlength="1024", placeholder="1024文字以内"></textarea>
+    </div>
+    <br>
+    <input type="submit" value="校正する">
+</form>
+{% endblock %}
