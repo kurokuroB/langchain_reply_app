@@ -49,4 +49,4 @@ def proofreading():
 
 
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run(port=8080, host='0.0.0.0') #host='0.0.0.0'で外部公開を行う

@@ -6,3 +6,5 @@ ADD . /app
 RUN apt-get update && apt-get clean
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+
+ENTRYPOINT ["python", "app.py"]
