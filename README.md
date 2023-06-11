@@ -1,2 +1,2 @@
-# chatgpt_proofreading_app
-希望の文体で、文章を校正するアプリ
+# langchain_reply_app
+希望の文体で、返信文を作成するアプリ
