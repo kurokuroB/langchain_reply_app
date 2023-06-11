@@ -9,8 +9,10 @@ app = Flask(__name__)
 MODEL = "text-davinci-003"
 
 # 会話用のインスタンスconversationを作成
-llm = OpenAI(model_name=MODEL, max_tokens=1024) #出力文字数を多めに取る。デフォルトは256で少ない。
-conversation = ConversationChain(llm=llm, verbose=False, memory=ConversationBufferMemory())
+llm = OpenAI(model_name=MODEL, max_tokens=1024) 
+conversation = ConversationChain(
+    llm=llm, verbose=False, memory=ConversationBufferMemory()
+    )
 
 #ルーティング
 @app.route("/")
@@ -19,20 +21,25 @@ def index():
 
 
 @app.route("/result", methods=["POST"])
-def proofreading():
+def write():
     style = request.form["style"]
     sentence = request.form["sentence"]
     
     # styleの記憶
     _ = conversation("【】で囲まれた文章の文体は文体Aです。" + "【" + style + "】")
     
-    # 校正
-    response=conversation("【】で囲まれた文章に対して、文体Aで返信文を作成してください。" + "【" + sentence + "】")
+    # 返信文生成
+    response=conversation(
+        "【】で囲まれた文章に対して、文体Aで返信文を作成してください。" \
+         + "【" + sentence + "】"
+         )
 
     # 履歴削除
     conversation.memory.clear()
     
-    return render_template("result.html", title="結果画面", result=response['response'])
+    return render_template(
+        "result.html", title="結果画面", result=response['response']
+        )
 
 #おまじない
 if __name__ == "__main__":
